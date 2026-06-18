@@ -3,139 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Anaminese</title>
+    <title>Ficha de Anamnese</title>
+    <style>
+        html {
+            box-sizing: border-box;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #ffe5ef 0%, #ffecf6 55%, #fff9fb 100%);
+            color: #2a2032;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        body {
+            margin: 0;
+            padding: 16px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 32px;
+            border-radius: 28px;
+            box-shadow: 0 24px 60px rgba(97, 58, 105, 0.12);
+            border: 1px solid rgba(255, 146, 196, 0.35);
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+        .eyebrow {
+            margin: 0;
+            color: #a5659e;
+            font-size: 0.82rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        h1 {
+            margin: 10px 0 8px;
+            font-size: 2.1rem;
+            color: #22172a;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .title-icon {
+            width: 48px;
+            height: 48px;
+            display: inline-grid;
+            place-items: center;
+            background: linear-gradient(135deg, #ff82b8, #ff4d9b);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 12px 28px rgba(255, 94, 158, 0.22);
+        }
+        .subtitle {
+            margin: 0;
+            color: #695870;
+            font-size: 0.96rem;
+            line-height: 1.7;
+        }
+        .form-field {
+            margin-bottom: 18px;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #3a2b46;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid #ded1de;
+            outline: none;
+            font-size: 1rem;
+            color: #34303b;
+            background: #faf7fb;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #8c4f8f;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(176, 138, 190, 0.12);
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            background: #faf7fb;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .grid-two {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .signature-panel {
+            display: grid;
+            gap: 10px;
+        }
+        .assinaturaCanvas {
+            width: 100%;
+            min-height: 200px;
+            border: 1px solid #e6d1e4;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: inset 0 0 0 1px rgba(104, 87, 123, 0.05);
+        }
+        button {
+            width: 100%;
+            min-height: 52px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.98rem;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        .primary-button {
+            background: linear-gradient(135deg, #ff66a2, #ff4d9b);
+            color: #1b0c1f;
+            box-shadow: 0 14px 26px rgba(255, 77, 155, 0.24);
+        }
+        .primary-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 30px rgba(255, 77, 155, 0.28);
+        }
+        .secondary-button {
+            background: #ffe2f1;
+            color: #24122d;
+            border: 1px solid #ffb7d2;
+            box-shadow: none;
+            text-transform: none;
+        }
+        .secondary-button:hover {
+            background: #ffd0e4;
+        }
+        .button-group {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .small-clear-btn {
+            width: auto;
+            padding: 10px 14px;
+            align-self: flex-start;
+            font-size: 0.95rem;
+            color: #24122d;
+            background: #ffe7f2;
+            border: 1px solid #ffb7d2;
+            border-radius: 14px;
+        }
+        .small-clear-btn:hover {
+            background: #ffd1e7;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 24px;
+            color: #735e7d;
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 22px;
+            }
+            .grid-two {
+                grid-template-columns: 1fr;
+            }
+            .button-group {
+                gap: 10px;
+            }
+        }
+        @media (max-width: 520px) {
+            body {
+                padding: 12px;
+            }
+            .container {
+                padding: 18px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .subtitle {
+                font-size: 0.92rem;
+            }
+            button {
+                padding: 16px 14px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div style="max-width:700px;margin:auto;background:white;padding:25px;border-radius:15px;">
+    <div class="container" id="fichaContainer">
+        <header class="page-header">
+            <p class="eyebrow">Preta Nails</p>
+            <h1><span class="title-icon">💅</span>Ficha de Anamnese</h1>
+            <p class="subtitle">Registro profissional do perfil de saúde e estilo de atendimento.</p>
+        </header>
 
-    <h1 style="text-align:center;color:#ff1493;">
-        💅 PRETA NAILS 💅
-    </h1>
+        <div class="form-field">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome completo" />
+        </div>
 
-    <h2>Ficha de Anamnese</h2>
+        <div class="form-field">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(xx) xxxxx-xxxx" />
+        </div>
 
-    <label>Nome Completo</label><br>
-    <input type="text" style="width:100%;padding:10px;"><br><br>
+        <div class="form-field">
+            <label for="idade">Idade</label>
+            <input type="number" id="idade" name="idade" placeholder="Idade" />
+        </div>
 
-    <label>WhatsApp</label><br>
-    <input type="tel" style="width:100%;padding:10px;"><br><br>
+        <div class="form-field">
+            <label for="alergias">Possui alergias?</label>
+            <select id="alergias" onchange="mostrarAlergias()">
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+        </div>
 
-    <label>Idade</label><br>
-    <input type="number" style="width:100%;padding:10px;"><br><br>
+        <div id="campoAlergias" class="form-field hidden">
+            <label for="alergias-texto">Se sim, informe quais:</label>
+            <textarea id="alergias-texto" rows="4" placeholder="Descreva suas alergias..." ></textarea>
+        </div>
 
-   <label>Possui alergias?</label><br>
+        <div class="form-field">
+            <label for="medicamentos">Faz uso de medicamentos?</label>
+            <select id="medicamentos" onchange="mostrarMedicamentos()">
+                <option value="Não">Não</option>
+                <option value="Sim">Sim</option>
+            </select>
+        </div>
 
-<select id="alergias"
-onchange="mostrarAlergias()"
-style="width:100%;padding:10px;">
-    <option value="Não">Não</option>
-    <option value="Sim">Sim</option>
-</select><br><br>
+        <div id="campoMedicamentos" class="form-field hidden">
+            <label for="medicamentos-texto">Se sim, informe quais:</label>
+            <textarea id="medicamentos-texto" rows="4" placeholder="Descreva os medicamentos..." ></textarea>
+        </div>
 
-<div id="campoAlergias" style="display:none;">
+        <div class="grid-two">
+            <div class="form-field">
+                <label for="gravida">Está grávida?</label>
+                <select id="gravida">
+                    <option>Não</option>
+                    <option>Sim</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="alongamento">Já fez alongamento de unhas?</label>
+                <select id="alongamento" onchange="mostrarAlongamento()">
+                    <option value="Não">Não</option>
+                    <option value="Sim">Sim</option>
+                </select>
+            </div>
+        </div>
 
-<label>Se sim, informe quais:</label><br>
+        <div id="campoAlongamento" class="form-field hidden">
+            <label for="alongamento-texto">Se sim, informe qual tipo:</label>
+            <textarea id="alongamento-texto" rows="4" placeholder="Descreva o tipo de alongamento..." ></textarea>
+        </div>
 
-<textarea rows="4"
-placeholder="Descreva suas alergias aqui..."
-style="width:100%;padding:10px;"></textarea>
+        <div class="form-field">
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" rows="5" placeholder="Descreva observações importantes..."></textarea>
+        </div>
 
-</div>
-    <label>Faz uso de medicamentos?</label><br>
+        <div class="form-field">
+            <label>Assinatura do cliente</label>
+            <div class="signature-panel">
+                <canvas id="assinaturaCanvas" class="assinaturaCanvas" width="500" height="200"></canvas>
+                <button type="button" class="small-clear-btn" onclick="limparAssinatura()">Limpar</button>
+            </div>
+        </div>
 
-<select id="medicamentos"
-onchange="mostrarMedicamentos()"
-style="width:100%;padding:10px;">
-    <option value="Não">Não</option>
-    <option value="Sim">Sim</option>
-</select><br><br>
+        <div class="button-group">
+            <button type="button" class="secondary-button" onclick="abrirWhatsApp()">Enviar WhatsApp</button>
+            <button type="button" class="primary-button" onclick="salvarNaGaleria()">Salvar na galeria</button>
+        </div>
 
-<div id="campoMedicamentos" style="display:none;">
+        <p class="footer-note">Preta Nails • Sabrina de Lemos<br>Dados utilizados apenas para atendimento.</p>
+    </div>
 
-<label>Se sim, informe quais:</label><br>
-
-<textarea rows="4"
-placeholder="Descreva os medicamentos..."
-style="width:100%;padding:10px;"></textarea>
-
-</div>
-
-<br><br>
-    <label>Está grávida?</label><br>
-    <select style="width:100%;padding:10px;">
-        <option>Não</option>
-        <option>Sim</option>
-    </select><br><br>
-
-    <label>Já fez alongamento de unhas?</label><br>
-
-<select id="alongamento"
-onchange="mostrarAlongamento()"
-style="width:100%;padding:10px;">
-    <option value="Não">Não</option>
-    <option value="Sim">Sim</option>
-</select><br><br>
-
-<div id="campoAlongamento" style="display:none;">
-
-<label>Se sim, informe qual tipo:</label><br>
-
-<textarea rows="4"
-placeholder="Descreva o tipo de alongamento..."
-style="width:100%;padding:10px;"></textarea>
-
-</div>
-
-<br><br>
-    <label>Observações</label><br>
-    <textarea rows="5" style="width:100%;padding:10px;"></textarea><br><br>
-<label><b>Assinatura do Cliente</b></label><br>
-
-<canvas id="assinaturaCanvas"
-        width="500"
-        height="200"
-        style="border:2px solid #ff1493;
-               background:white;
-               border-radius:10px;">
-</canvas>
-
-<br><br>
-
-<button
-type="submit"
-style="
-width:100%;
-padding:22px;
-font-size:20px;
-font-weight:900;
-letter-spacing:2px;
-text-transform:uppercase;
-background:linear-gradient(135deg,#ff1493,#ff69b4,#ff1493);
-color:white;
-border:none;
-border-radius:20px;
-cursor:pointer;
-box-shadow:
-0 0 10px #ff1493,
-0 0 25px #ff1493,
-0 0 50px rgba(255,20,147,0.8),
-0 12px 25px rgba(0,0,0,0.3);">
-💅 SALVAR FICHA 💅
-</button>
-
-<p style="
-text-align:center;
-margin-top:15px;
-font-size:15px;
-color:#f753aa;
-line-height:1.6;
-font-weight:500;">
-💅 PRETA NAILS • Sabrina de Lemos<br>
-✨ Cuidado, elegância e confiança em cada atendimento.<br>
-🔒 Seus dados são utilizados exclusivamente para seu atendimento.
-</p>
-
-</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNa5fPqkN4eEwQGqt3X1KNR+OZKdYOvfbnczd9MdQfvdFvN8Y4XKhmHca04hvC7j0wO8lY/N9NYnhwC5pY2T0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 const canvas = document.getElementById("assinaturaCanvas");
 const ctx = canvas.getContext("2d");
@@ -165,6 +329,69 @@ function desenhar(e){
 function limparAssinatura(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+
+function abrirWhatsApp(){
+    const pdfLink = 'https://preta-nails.000webhostapp.com/ficha-de-anamnese.pdf';
+    const message = encodeURIComponent('Olá! Segue a ficha de anamnese assinada. Confira o PDF aqui: ' + pdfLink);
+    const phone = '5511982311608';
+    const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+function salvarNaGaleria(){
+    const ficha = document.getElementById('fichaContainer');
+    const clone = ficha.cloneNode(true);
+    clone.style.position = 'absolute';
+    clone.style.left = '-9999px';
+    clone.style.top = '0';
+    clone.style.visibility = 'visible';
+    document.body.appendChild(clone);
+
+    const cloneButtons = clone.querySelectorAll('.button-group, .small-clear-btn');
+    cloneButtons.forEach(el => el.remove());
+
+    html2canvas(clone, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        scrollY: 0
+    }).then(canvas => {
+        document.body.removeChild(clone);
+        canvas.toBlob(async (blob) => {
+            if (!blob) {
+                alert('Não foi possível gerar a imagem. Tente novamente.');
+                return;
+            }
+
+            const file = new File([blob], 'ficha-de-anamnese.png', { type: 'image/png' });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Ficha de Anamnese',
+                        text: 'Salvar a imagem da ficha na galeria.'
+                    });
+                    return;
+                } catch (shareError) {
+                    // continue to fallback download
+                }
+            }
+
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'ficha-de-anamnese.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }, 'image/png');
+    }).catch(() => {
+        document.body.removeChild(clone);
+        alert('Não foi possível gerar a imagem. Tente novamente.');
+    });
+}
+
 canvas.addEventListener("touchstart", (e) => {
     desenhando = true;
     e.preventDefault();
