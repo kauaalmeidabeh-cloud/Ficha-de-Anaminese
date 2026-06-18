@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Anaminese</title>
+</head>
+<body>
+    <div style="max-width:700px;margin:auto;background:white;padding:25px;border-radius:15px;">
+
+    <h1 style="text-align:center;color:#ff1493;">
+        💅 PRETA NAILS 💅
+    </h1>
+
+    <h2>Ficha de Anamnese</h2>
+
+    <label>Nome Completo</label><br>
+    <input type="text" style="width:100%;padding:10px;"><br><br>
+
+    <label>WhatsApp</label><br>
+    <input type="tel" style="width:100%;padding:10px;"><br><br>
+
+    <label>Idade</label><br>
+    <input type="number" style="width:100%;padding:10px;"><br><br>
+
+    <label>Possui alergias?</label><br>
+<select style="width:100%;padding:10px;">
+    <option>Não</option>
+    <option>Sim</option>
+</select><br><br>
+
+<label>Se sim, informe quais:</label><br>
+<textarea rows="4"
+placeholder="Descreva suas alergias aqui..."
+style="width:100%;padding:10px;"></textarea><br><br>
+
+    <label>faz uso de medicamentos?</label><br>
+<select style="width:100%;padding:10px;">
+    <option>Não</option>
+    <option>Sim</option>
+</select><br><br>
+
+<label>Se sim, informe quais:</label><br>
+<textarea rows="4"
+placeholder="Descreva os medicamentos..."
+style="width:100%;padding:10px;"></textarea><br><br>
+
+    <label>Está grávida?</label><br>
+    <select style="width:100%;padding:10px;">
+        <option>Não</option>
+        <option>Sim</option>
+    </select><br><br>
+
+    <label>Já fez alongamento de unhas?</label><br>
+    <select style="width:100%;padding:10px;">
+        <option>Não</option>
+        <option>Sim</option>
+    </select><br><br>
+
+    <label>se sim infotme qual tipo?:</label><br>
+<textarea rows="4"
+placeholder="Descreva o tipo de alongamento..."
+style="width:100%;padding:10px;"></textarea><br><br>
+
+    <label>Observações</label><br>
+    <textarea rows="5" style="width:100%;padding:10px;"></textarea><br><br>
+<label><b>Assinatura do Cliente</b></label><br>
+
+<canvas id="assinaturaCanvas"
+        width="500"
+        height="200"
+        style="border:2px solid #ff1493;
+               background:white;
+               border-radius:10px;">
+</canvas>
+
+<br><br>
+
+<button type="button" onclick="limparAssinatura()">
+    Limpar Assinatura
+</button>
+
+<br><br>
+    <button style="
+        width:100%;
+        padding:12px;
+        background:#ff69b4;
+        color:white;
+        border:none;
+        border-radius:8px;">
+        Salvar Ficha
+    </button>
+
+</div>
+<script>
+const canvas = document.getElementById("assinaturaCanvas");
+const ctx = canvas.getContext("2d");
+
+let desenhando = false;
+
+canvas.addEventListener("mousedown", () => desenhando = true);
+canvas.addEventListener("mouseup", () => desenhando = false);
+canvas.addEventListener("mousemove", desenhar);
+
+function desenhar(e){
+    if(!desenhando) return;
+
+    const rect = canvas.getBoundingClientRect();
+
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000";
+
+    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+}
+
+function limparAssinatura(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+canvas.addEventListener("touchstart", (e) => {
+    desenhando = true;
+    e.preventDefault();
+});
+
+canvas.addEventListener("touchend", () => {
+    desenhando = false;
+    ctx.beginPath();
+});
+
+canvas.addEventListener("touchmove", (e) => {
+    if (!desenhando) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const toque = e.touches[0];
+
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000";
+
+    ctx.lineTo(toque.clientX - rect.left, toque.clientY - rect.top);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(toque.clientX - rect.left, toque.clientY - rect.top);
+
+    e.preventDefault();
+});
+</script>
+
+
+
+</body>
+</html>
