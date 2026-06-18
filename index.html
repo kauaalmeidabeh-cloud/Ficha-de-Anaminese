@@ -20,31 +20,47 @@
     <label>WhatsApp</label><br>
     <input type="tel" style="width:100%;padding:10px;"><br><br>
 
-    <label>Idade</label><br> 
+    <label>Idade</label><br>
     <input type="number" style="width:100%;padding:10px;"><br><br>
 
-    <label>Possui alergias?</label><br>
-<select style="width:100%;padding:10px;">
-    <option>Não</option>
-    <option>Sim</option>
+   <label>Possui alergias?</label><br>
+
+<select id="alergias"
+onchange="mostrarAlergias()"
+style="width:100%;padding:10px;">
+    <option value="Não">Não</option>
+    <option value="Sim">Sim</option>
 </select><br><br>
 
+<div id="campoAlergias" style="display:none;">
+
 <label>Se sim, informe quais:</label><br>
+
 <textarea rows="4"
 placeholder="Descreva suas alergias aqui..."
-style="width:100%;padding:10px;"></textarea><br><br>
+style="width:100%;padding:10px;"></textarea>
 
-    <label>faz uso de medicamentos?</label><br>
-<select style="width:100%;padding:10px;">
-    <option>Não</option>
-    <option>Sim</option>
+</div>
+    <label>Faz uso de medicamentos?</label><br>
+
+<select id="medicamentos"
+onchange="mostrarMedicamentos()"
+style="width:100%;padding:10px;">
+    <option value="Não">Não</option>
+    <option value="Sim">Sim</option>
 </select><br><br>
 
+<div id="campoMedicamentos" style="display:none;">
+
 <label>Se sim, informe quais:</label><br>
+
 <textarea rows="4"
 placeholder="Descreva os medicamentos..."
-style="width:100%;padding:10px;"></textarea><br><br>
+style="width:100%;padding:10px;"></textarea>
 
+</div>
+
+<br><br>
     <label>Está grávida?</label><br>
     <select style="width:100%;padding:10px;">
         <option>Não</option>
@@ -52,16 +68,25 @@ style="width:100%;padding:10px;"></textarea><br><br>
     </select><br><br>
 
     <label>Já fez alongamento de unhas?</label><br>
-    <select style="width:100%;padding:10px;">
-        <option>Não</option>
-        <option>Sim</option>
-    </select><br><br>
 
-    <label>se sim infotme qual tipo?:</label><br>
+<select id="alongamento"
+onchange="mostrarAlongamento()"
+style="width:100%;padding:10px;">
+    <option value="Não">Não</option>
+    <option value="Sim">Sim</option>
+</select><br><br>
+
+<div id="campoAlongamento" style="display:none;">
+
+<label>Se sim, informe qual tipo:</label><br>
+
 <textarea rows="4"
 placeholder="Descreva o tipo de alongamento..."
-style="width:100%;padding:10px;"></textarea><br><br>
+style="width:100%;padding:10px;"></textarea>
 
+</div>
+
+<br><br>
     <label>Observações</label><br>
     <textarea rows="5" style="width:100%;padding:10px;"></textarea><br><br>
 <label><b>Assinatura do Cliente</b></label><br>
@@ -76,20 +101,39 @@ style="width:100%;padding:10px;"></textarea><br><br>
 
 <br><br>
 
-<button type="button" onclick="limparAssinatura()">
-    Limpar Assinatura
+<button
+type="submit"
+style="
+width:100%;
+padding:22px;
+font-size:20px;
+font-weight:900;
+letter-spacing:2px;
+text-transform:uppercase;
+background:linear-gradient(135deg,#ff1493,#ff69b4,#ff1493);
+color:white;
+border:none;
+border-radius:20px;
+cursor:pointer;
+box-shadow:
+0 0 10px #ff1493,
+0 0 25px #ff1493,
+0 0 50px rgba(255,20,147,0.8),
+0 12px 25px rgba(0,0,0,0.3);">
+💅 SALVAR FICHA 💅
 </button>
 
-<br><br>
-    <button style="
-        width:100%;
-        padding:12px;
-        background:#ff69b4;
-        color:white;
-        border:none;
-        border-radius:8px;">
-        Salvar Ficha
-    </button>
+<p style="
+text-align:center;
+margin-top:15px;
+font-size:15px;
+color:#f753aa;
+line-height:1.6;
+font-weight:500;">
+💅 PRETA NAILS • Sabrina de Lemos<br>
+✨ Cuidado, elegância e confiança em cada atendimento.<br>
+🔒 Seus dados são utilizados exclusivamente para seu atendimento.
+</p>
 
 </div>
 <script>
@@ -149,9 +193,51 @@ canvas.addEventListener("touchmove", (e) => {
 
     e.preventDefault();
 });
+function mostrarAlergias(){
+    const select = document.getElementById("alergias");
+    const campoAlergias = document.getElementById("campoAlergias");
+
+    if(select.value === "Sim"){
+        campoAlergias.style.display = "block";
+    } else {
+        campoAlergias.style.display = "none";
+    }
+}
+function mostrarMedicamentos(){
+    const select = document.getElementById("medicamentos");
+    const campoMedicamentos = document.getElementById("campoMedicamentos");
+
+    if(select.value === "Sim"){
+        campoMedicamentos.style.display = "block";
+    } else {
+        campoMedicamentos.style.display = "none";
+    }
+}
+function mostrarAlongamento(){
+    const select = document.getElementById("alongamento");
+    const campoAlongamento = document.getElementById("campoAlongamento");
+
+    if(select.value === "Sim"){
+        campoAlongamento.style.display = "block";
+    } else {
+        campoAlongamento.style.display = "none";
+    }
+}
 </script>
 
 
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
