@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -452,7 +453,37 @@ function mostrarAlongamento(){
 }
 </script>
 
-
+<script>
+// ENVIA A FICHA PRO GOOGLE DRIVE + EMAIL
+document.querySelector('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const btn = this.querySelector('button[type="submit"]');
+    const textoOriginal = btn.innerText;
+    btn.disabled = true;
+    btn.innerText = 'Enviando ficha...';
+    
+    const formData = new FormData(this);
+    
+    try {
+        await fetch('https://script.google.com/macros/s/AKfycbxHnxsoSrumwkT0S0N-Uch0emJt3085OQ_8XupoSmOLF7L_2xGtCAGENvdM_bEp9zjN/exec', {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors' 
+        });
+        
+        alert('✅ Ficha enviada com sucesso!\\n\\nO PDF foi salvo no Google Drive e enviado por email.');
+        this.reset();
+        
+    } catch (erro) {
+        alert('❌ Erro ao enviar. Tente novamente.');
+        console.log('Erro:', erro);
+    }
+    
+    btn.disabled = false;
+    btn.innerText = textoOriginal;
+});
+</script>
 
 </body>
 </html>
