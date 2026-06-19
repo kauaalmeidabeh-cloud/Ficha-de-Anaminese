@@ -234,7 +234,7 @@
 
         <div class="form-field">
             <label for="alergias">Possui alergias?</label>
-            <select id="alergias" onchange="mostrarAlergias()">
+            <select id="alergias" name="alergias" onchange="mostrarAlergias()">
                 <option value="Não">Não</option>
                 <option value="Sim">Sim</option>
             </select>
@@ -242,12 +242,12 @@
 
         <div id="campoAlergias" class="form-field hidden">
             <label for="alergias-texto">Se sim, informe quais:</label>
-            <textarea id="alergias-texto" rows="4" placeholder="Descreva suas alergias..." ></textarea>
+            <textarea id="alergias-texto" name="alergias_texto" rows="4" placeholder="Descreva suas alergias..." ></textarea>
         </div>
 
         <div class="form-field">
             <label for="medicamentos">Faz uso de medicamentos?</label>
-            <select id="medicamentos" onchange="mostrarMedicamentos()">
+            <select id="medicamentos" name="medicamentos" onchange="mostrarMedicamentos()">
                 <option value="Não">Não</option>
                 <option value="Sim">Sim</option>
             </select>
@@ -255,20 +255,20 @@
 
         <div id="campoMedicamentos" class="form-field hidden">
             <label for="medicamentos-texto">Se sim, informe quais:</label>
-            <textarea id="medicamentos-texto" rows="4" placeholder="Descreva os medicamentos..." ></textarea>
+            <textarea id="medicamentos-texto" name="medicamentos_texto" rows="4" placeholder="Descreva os medicamentos..." ></textarea>
         </div>
 
         <div class="grid-two">
             <div class="form-field">
                 <label for="gravida">Está grávida?</label>
-                <select id="gravida">
-                    <option>Não</option>
-                    <option>Sim</option>
+                <select id="gravida" name="gravida">
+                    <option value="Não">Não</option>
+                    <option value="Sim">Sim</option>
                 </select>
             </div>
             <div class="form-field">
                 <label for="alongamento">Já fez alongamento de unhas?</label>
-                <select id="alongamento" onchange="mostrarAlongamento()">
+                <select id="alongamento" name="alongamento" onchange="mostrarAlongamento()">
                     <option value="Não">Não</option>
                     <option value="Sim">Sim</option>
                 </select>
@@ -277,12 +277,12 @@
 
         <div id="campoAlongamento" class="form-field hidden">
             <label for="alongamento-texto">Se sim, informe qual tipo:</label>
-            <textarea id="alongamento-texto" rows="4" placeholder="Descreva o tipo de alongamento..." ></textarea>
+            <textarea id="alongamento-texto" name="alongamento_texto" rows="4" placeholder="Descreva o tipo de alongamento..." ></textarea>
         </div>
 
         <div class="form-field">
             <label for="observacoes">Observações</label>
-            <textarea id="observacoes" rows="5" placeholder="Descreva observações importantes..."></textarea>
+            <textarea id="observacoes" name="observacoes" rows="5" placeholder="Descreva observações importantes..."></textarea>
         </div>
 
         <div class="form-field">
@@ -467,6 +467,9 @@ document.getElementById('form-anamnese').addEventListener('submit', async functi
     btn.innerText = 'Enviando ficha...';
     
     const formData = new FormData(this);
+    const signatureCanvas = document.getElementById('assinaturaCanvas');
+    const assinaturaBase64 = signatureCanvas.toDataURL('image/png');
+    formData.append('assinatura', assinaturaBase64);
     
     try {
         await fetch('https://script.google.com/macros/s/AKfycbxHnxsoSrumwkT0S0N-Uch0emJt3085OQ_8XupoSmOLF7L_2xGtCAGENvdM_bEp9zjN/exec', {
